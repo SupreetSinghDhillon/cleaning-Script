@@ -15,8 +15,9 @@ def filter_data(data):
     new_data = []
     for entry in data['data']:
         url = entry['data']['siteInfo']['url']
-        # Check if 'search' is in the URL but not 'youtube'
-        if 'search' in url and 'youtube' not in url:
+        site_name = entry['data']['siteInfo']['siteName']
+        # Check conditions to exclude entries
+        if 'search' in url or ('www.youtube.com' in url and 'YouTube' == site_name.strip()):
             continue  # Skip adding this entry
         new_data.append(entry)
     return {'data': new_data}
